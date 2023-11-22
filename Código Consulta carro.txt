@@ -1,0 +1,83 @@
+Sub Consulta_carro()
+Dim modelo_carro As String
+Dim MARCA As String
+Dim MODELO As String
+Dim MOTORIZACAO As String
+Dim COMBUSTIVEL As String
+Dim POTENCIA As String
+Dim TORQUE As String
+Dim CONSUMO As String
+Dim CAMBIO As String
+Dim AUTONOMIA As String
+Dim TEMPO As String
+Dim VALOR As String
+Dim ANO As String
+Dim PESO As String
+Dim TANQUE As String
+Dim nun_linha As Integer
+Application.ScreenUpdating = False
+ Sheets("banco").Select
+nun_linha = Range("a1000000").End(xlUp).Row
+ Sheets("sistema").Select
+ nome_carro = Range("d8").Value
+
+
+modelo_carro = nome_carro
+modelo_carro = UCase(modelo_carro)
+ 
+   For linha = 1 To nun_linha Step 1
+    Sheets("BANCO").Select
+
+If modelo_carro = Range("b" & linha).Value Then
+MARCA = Range("a" & linha).Value
+MODELO = Range("b" & linha).Value
+MOTORIZACAO = Range("c" & linha).Value
+COMBUSTIVEL = Range("d" & linha).Value
+POTENCIA = Range("e" & linha).Value
+TORQUE = Range("f" & linha).Value
+CONSUMO = Range("g" & linha).Value
+CAMBIO = Range("h" & linha).Value
+AUTONOMIA = Range("i" & linha).Value
+TEMPO = Range("j" & linha).Value
+VALOR = Range("k" & linha).Value
+VALOR = "R$ " & Format(VALOR, "00,00")
+ANO = Range("l" & linha).Value
+PESO = Range("m" & linha).Value
+TANQUE = Range("n" & linha).Value
+ Sheets("SISTEMA").Select
+
+
+MsgBox ("Marca do Carro: " & MARCA & vbNewLine & _
+"Modelo do carro: " & MODELO & vbNewLine & _
+"Potência do Carro: " & POTENCIA & vbNewLine & _
+"Combustível do Carro: " & COMBUSTIVEL & vbNewLine & _
+"Motorização do Carro: " & POTENCIA & vbNewLine & _
+"Torque do Carro: " & TORQUE & vbNewLine & _
+"Consumo do Carro: " & CONSUMO & vbNewLine & _
+"Cambio do Carro: " & CAMBIO & vbNewLine & _
+"Autonomia do Carro: " & AUTONOMIA & vbNewLine & _
+"Tempo do Carro: " & TEMPO & vbNewLine & _
+"Valor do Carro: " & VALOR & vbNewLine & _
+"Ano do Carro: " & ANO & vbNewLine & _
+"Tanque do Carro: " & TANQUE & vbNewLine & _
+"Peso do Carro: " & PESO)
+
+
+End If
+
+If modelo_carro = "" Or nun_linha = linha Then
+MsgBox ("modelo nao localizado")
+Exit For
+End If
+ 
+Next
+ Sheets("SISTEMA").Select
+ Application.ScreenUpdating = True
+
+End
+
+
+
+
+
+End Sub
