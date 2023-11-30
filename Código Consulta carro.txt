@@ -16,19 +16,28 @@ Dim PESO As String
 Dim TANQUE As String
 Dim nun_linha As Integer
 Application.ScreenUpdating = False
- Sheets("banco").Select
+Sheets("banco").Select
+'variável nun_linha retorna a última linha preenchida da planilha banco de dados da coluna a
+'onde está especificado os modelos cadastrados para consulta
 nun_linha = Range("a1000000").End(xlUp).Row
- Sheets("sistema").Select
- nome_carro = Range("d8").Value
-
-
+Sheets("sistema").Select
+'Variável nome_carro recebe o valor especificado pelo usuário na linha D8 da planilha'
+nome_carro = Range("d8").Value
+'Entrada '
+'variável que recebe o nome do carro'
 modelo_carro = nome_carro
+'variável que transforma em maiuscula'
 modelo_carro = UCase(modelo_carro)
- 
-   For linha = 1 To nun_linha Step 1
-    Sheets("BANCO").Select
-
+'Processamento '
+'o for verifica da posição 1 da coluna b da planilha banco de dados o nome especificado pelo
+'usuário, caso localizado retorna a especificação do carro caso contrário traz a mensagem não
+'localizado
+ For linha = 1 To nun_linha Step 1
+ Sheets("BANCO").Select
+'parte do script que faz a verificação do modelo do carro'
 If modelo_carro = Range("b" & linha).Value Then
+'caso localizado atribui as variáveis abaixo o valor definido na planilha de banco de dados de
+'acordo com a posição da linha
 MARCA = Range("a" & linha).Value
 MODELO = Range("b" & linha).Value
 MOTORIZACAO = Range("c" & linha).Value
@@ -44,9 +53,9 @@ VALOR = "R$ " & Format(VALOR, "00,00")
 ANO = Range("l" & linha).Value
 PESO = Range("m" & linha).Value
 TANQUE = Range("n" & linha).Value
- Sheets("SISTEMA").Select
-
-
+Sheets("SISTEMA").Select
+'Saída'
+'Apresenta ao usuário a especificação do carro caso localizado'
 MsgBox ("Marca do Carro: " & MARCA & vbNewLine & _
 "Modelo do carro: " & MODELO & vbNewLine & _
 "Potência do Carro: " & POTENCIA & vbNewLine & _
@@ -61,23 +70,15 @@ MsgBox ("Marca do Carro: " & MARCA & vbNewLine & _
 "Ano do Carro: " & ANO & vbNewLine & _
 "Tanque do Carro: " & TANQUE & vbNewLine & _
 "Peso do Carro: " & PESO)
-
-
 End If
-
+'verifica se o valor passado para o usuário e vazio ou não encontra se na base de dados, caso
+'seja uma desta opção retorna a mensagem modelo não localizado
 If modelo_carro = "" Or nun_linha = linha Then
 MsgBox ("modelo nao localizado")
 Exit For
 End If
- 
 Next
- Sheets("SISTEMA").Select
- Application.ScreenUpdating = True
-
+Sheets("SISTEMA").Select
+Application.ScreenUpdating = True
 End
-
-
-
-
-
 End Sub
