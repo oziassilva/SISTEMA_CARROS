@@ -15,6 +15,9 @@ Dim ANO As String
 Dim PESO As String
 Dim TANQUE As String
 Dim nun_linha As Integer
+Dim nome_caro As String
+Dim nome_carro As String
+
 Application.ScreenUpdating = False
 Sheets("banco").Select
 'variável nun_linha retorna a última linha preenchida da planilha banco de dados da coluna a
@@ -23,8 +26,7 @@ nun_linha = Range("a1000000").End(xlUp).Row
 Sheets("sistema").Select
 'Variável nome_carro recebe o valor especificado pelo usuário na linha D8 da planilha'
 nome_carro = Range("d8").Value
-'Entrada '
-'variável que recebe o nome do carro'
+'Entrada variável que recebe o nome do carro'
 modelo_carro = nome_carro
 'variável que transforma em maiuscula'
 modelo_carro = UCase(modelo_carro)
@@ -70,13 +72,18 @@ MsgBox ("Marca do Carro: " & MARCA & vbNewLine & _
 "Ano do Carro: " & ANO & vbNewLine & _
 "Tanque do Carro: " & TANQUE & vbNewLine & _
 "Peso do Carro: " & PESO)
+Exit For
 End If
 'verifica se o valor passado para o usuário e vazio ou não encontra se na base de dados, caso
 'seja uma desta opção retorna a mensagem modelo não localizado
-If modelo_carro = "" Or nun_linha = linha Then
-MsgBox ("modelo nao localizado")
+If modelo_carro = "" Then
+MsgBox ("modelo vazio favor digitar novamente")
+Exit For
+ElseIf nun_linha = linha And modelo_carro <> Range("b" & linha).Value Then
+MsgBox ("modelo " + nome_carro + " nao localizado no sistema")
 Exit For
 End If
+
 Next
 Sheets("SISTEMA").Select
 Application.ScreenUpdating = True
